@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <RepositoryUrl>https://github.com/tsiswaryalakshmi/nuget2sep</RepositoryUrl>
+    <RepositoryUrl>https://github.com/tsiswaryalakshmi/nuget5sep</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
