@@ -1,11 +1,12 @@
-name: "Nugetautomation"
+name: "CalcAdd-Nugetautomation"
 
-on: ["push"]
-#on:
- # push:
+#on: ["push"]
+on:
+  push:
   #  tags:
    # - 'v*'
-
+    paths:
+    - CalcAdd
 env:
   #PROJECT_PATH: 'CalculationRef.csproj'
   PROJECT_PATH: ${{ github.workspace }}
