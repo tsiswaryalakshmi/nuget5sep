@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CalcAdd</id>
-    <version>${{ secrets.NUGET_VERSION }}</version>
+    <version>2</version>
     <title>title</title>
     <authors>author</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
