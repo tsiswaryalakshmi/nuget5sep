@@ -1,0 +1,6 @@
+C:\Offical\Temp\SampleTestProject\CalculationRef\bin\Release\CalculationRef.dll
+C:\Offical\Temp\SampleTestProject\CalculationRef\bin\Release\CalculationRef.pdb
+C:\Offical\Temp\SampleTestProject\CalculationRef\obj\Release\CalculationRef.csproj.AssemblyReference.cache
+C:\Offical\Temp\SampleTestProject\CalculationRef\obj\Release\CalculationRef.csproj.CoreCompileInputs.cache
+C:\Offical\Temp\SampleTestProject\CalculationRef\obj\Release\CalculationRef.dll
+C:\Offical\Temp\SampleTestProject\CalculationRef\obj\Release\CalculationRef.pdb

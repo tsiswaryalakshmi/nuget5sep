@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+<<<<<<< HEAD:Calculation_Addition/CalculationRef.nuspec
+    <id>1</id>
+    <version>5</version>
+=======
+    <id>5</id>
+    <version>2</version>
+>>>>>>> 665a81effa10e0349c5e1f94ae2783769f8e2a51:CalculationRef.nuspec
+    <title>title</title>
+    <authors>author</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <!-- <icon>icon.png</icon> -->
+    <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl>
+    <description>description</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Tag1 Tag2</tags>
+<repository type="git" url="https://github.com/tsiswaryalakshmi/nuget2sep" />
+  </metadata>
+</package>
