@@ -8,7 +8,7 @@ on:
     branches:
     - main
     paths:
-    - CalcAdd
+    - 'CalcAdd'
 env:
   #PROJECT_PATH: 'CalculationRef.csproj'
   PROJECT_PATH: ${{ github.workspace }}
