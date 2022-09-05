@@ -53,7 +53,8 @@ jobs:
     #  run: nuget.exe pack **.nuspec
     #- name: Add Nuget
     #  run: nuget.exe Source Update -Name "github" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
-    #- name: Add Nuget
+    - name: Add Nuget
+      run: nuget.exe sources add -Name "CalcAdd" -source ${{ env.NUGET_SOURCE_URL }} -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     #  run: nuget.exe Source Update -Name "CalcAdd" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     - name: Pack Nuget
       #run: nuget.exe pack ${{ github.workspace }}\*.nuspec -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
