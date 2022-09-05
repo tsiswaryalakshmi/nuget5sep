@@ -1,0 +1,78 @@
+name: "Nugetautomation"
+
+on: ["push"]
+#on:
+ # push:
+  #  tags:
+   # - 'v*'
+
+env:
+  #PROJECT_PATH: 'CalculationRef.csproj'
+  PROJECT_PATH: ${{ github.workspace }}
+  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
+  NUGET_SOURCE_URL: 'https://nuget.pkg.github.com/tsiswaryalakshmi/index.json'
+  #NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
+
+jobs:
+  deploy:
+    name: 'Deploy'
+    runs-on: 'windows-latest'
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@v2
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+        
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1
+
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE
+
+   # - name: Restore Packages
+     # run: nuget restore SampleTestProject.sln
+   #   run: nuget restore CalculationRef.csproj
+      #-PackagesDirectory packages -SolutionDirectory SampleTestProject.sln
+
+   # - name: 'Build project'
+   #   run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
+
+    - name: 'Get Version'
+      id: version
+      uses: battila7/get-version-action@v2
+      
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.7
+    #- name: Generating Nuspec File  
+    #  run: nuget.exe spec "${{ github.workspace }}\**.csproj"
+    #- name: Pack Nuget Package
+    #  run: nuget.exe pack **.nuspec
+    #- name: Add Nuget
+    #  run: nuget.exe Source Update -Name "github" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
+    - name: Add Nuget
+      run: nuget.exe Source Update -Name "CalculationRef" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
+    - name: Pack Nuget
+      #run: nuget.exe pack ${{ github.workspace }}\*.nuspec -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+      run: nuget.exe pack CalculationRef.nuspec -NoDefaultExcludes -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+    - name: Push the Package 
+     # run: nuget.exe push ${{ env.PROJECT_PATH}}\*.nupkg ${{ secrets.NUGET_AUTH_TOKEN }} -source ${{ env.NUGET_SOURCE_URL }}
+      run: nuget.exe push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg ${{ secrets.NUGET_AUTH_TOKEN }} -source ${{ env.NUGET_SOURCE_URL }}
+
+    #- name: Upload a Build Artifact
+    #  uses: actions/upload-artifact@v2.2.2
+    #  with:
+          # Artifact name
+    #    name: GitHubActionsHelloWorldConsoleDownloadableArtifact #.zip will be added automatically
+    #    path: ./nugetpackagetfs2github/*.*
+      
+
+   # - name: 'Pack project'
+   #   #run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+   #   run: dotnet pack "${{ env.PROJECT_PATH }}\**.nuspec" --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+      
+    #- name: 'Push package'
+    #  run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.NUGET_AUTH_TOKEN }} -s ${{ env.NUGET_SOURCE_URL }}
