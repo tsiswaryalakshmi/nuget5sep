@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CalcSub</id>
-    <version>2</version>
+    <version>${{secrets.NUGET_SUB_VERSION}}</version>
     <title>titlee</title>
     <authors>author</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
