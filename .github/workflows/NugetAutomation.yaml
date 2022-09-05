@@ -54,7 +54,7 @@ jobs:
     #- name: Add Nuget
     #  run: nuget.exe Source Update -Name "github" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     - name: Add Nuget
-      run: nuget.exe Source Update -Name "CalculationRef" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
+      run: nuget.exe Source Update -Name "CalcAdd" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     - name: Pack Nuget
       #run: nuget.exe pack ${{ github.workspace }}\*.nuspec -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
       run: nuget.exe pack CalculationRef.nuspec -NoDefaultExcludes -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
