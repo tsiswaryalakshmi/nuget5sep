@@ -13,8 +13,9 @@ env:
   #PROJECT_PATH: 'CalculationRef.csproj'
   PROJECT_PATH: ${{ github.workspace }}
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
-  NUGET_SOURCE_URL: 'https://nuget.pkg.github.com/tsiswaryalakshmi/index.json'
+  #NUGET_SOURCE_URL: 'https://nuget.pkg.github.com/tsiswaryalakshmi/index.json'
   #NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
+  NUGET_SOURCE_URL: ${{ secrets.NUGET_SOURCE_URL }}
 
 jobs:
   deploy:
@@ -24,14 +25,14 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v2
       
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
+    #- name: Setup MSBuild
+    #  uses: microsoft/setup-msbuild@v1
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
         
-    - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1
+    #- name: Setup VSTest
+    #  uses: darenm/Setup-VSTest@v1
 
     - name: Navigate to Workspace
       run: cd $GITHUB_WORKSPACE
@@ -44,9 +45,9 @@ jobs:
    # - name: 'Build project'
    #   run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
 
-    - name: 'Get Version'
-      id: version
-      uses: battila7/get-version-action@v2
+    #- name: 'Get Version'
+    #  id: version
+    #  uses: battila7/get-version-action@v2
       
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.7
@@ -57,7 +58,7 @@ jobs:
     #- name: Add Nuget
     #  run: nuget.exe Source Update -Name "github" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     - name: Add Nuget
-      run: nuget.exe sources add -Name "CalcSub" -source ${{ env.NUGET_SOURCE_URL }} -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
+      run: nuget.exe sources add -Name "CalcSub" -source ${{ env.NUGET_SOURCE_URL }} -Username ${{ secrets.NUGET_USERNAME }} -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     #  run: nuget.exe Source Update -Name "CalcAdd" -Username tsiswaryalakshmi -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     - name: Pack Nuget
       #run: nuget.exe pack ${{ github.workspace }}\*.nuspec -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
