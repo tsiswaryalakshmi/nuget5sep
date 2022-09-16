@@ -8,14 +8,15 @@ on:
         type: string
       NUGET_SOURCE_URL: 
         type: string
-      PACKAGE_OUTPUT_DIRECTORY:
-        type: string
+      #PACKAGE_OUTPUT_DIRECTORY:
+      #  type: string
     secrets:
       NUGET_USERNAME:
         required: true
       NUGET_AUTH_TOKEN:
         required: true
-
+env:
+  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
 #env:
 #
 #  PROJECT_PATH: ${{ github.workspace }}
@@ -34,10 +35,10 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.5
     - name: Navigate to Workspace
       run: cd $GITHUB_WORKSPACE
-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.7
-
+   # - name: set env variable
+    #  echo "      PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output 
     - name: Add Nuget
       run: nuget.exe sources add -Name "CalcSub" -source ${{ inputs.NUGET_SOURCE_URL }} -Username ${{ secrets.NUGET_USERNAME }} -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     - name: Pack Nuget
