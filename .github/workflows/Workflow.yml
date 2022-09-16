@@ -6,6 +6,8 @@ name: Reusable Workflow user
 on:
   workflow_dispatch:
   push:
+  #  tags:
+   # - 'v*'
     branches:
     - main
     paths:
@@ -25,7 +27,7 @@ jobs:
     with:
       PATH: CalcuSub\CalculationRef.nuspec
       NUGET_SOURCE_URL: https://nuget.pkg.github.com/tsiswaryalakshmi/index.json
-      PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
+     # PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
     secrets:
       NUGET_USERNAME: ${{ secrets.NUGET_USERNAME }} 
       NUGET_AUTH_TOKEN: ${{ secrets.NUGET_AUTH_TOKEN }} 
