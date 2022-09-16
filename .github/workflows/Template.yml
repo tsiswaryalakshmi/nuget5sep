@@ -32,6 +32,8 @@ jobs:
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE
 
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.7
