@@ -30,7 +30,8 @@ jobs:
     steps:
     - name: 'Checkout'
       uses: actions/checkout@v2
-
+    - name: Print Workspace
+      run: echo ${{ github.workspace }}
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
     - name: Navigate to Workspace
