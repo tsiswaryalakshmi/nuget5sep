@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
     uses: tsiswaryalakshmi/nuget5sep/.github/workflows/Template.yml@main
     with:
       PATH: CalcuSub\CalculationRef.nuspec
-      NUGET_SOURCE_URL: https://nuget.pkg.github.com/tsiswaryalakshmi/index.json
+     # NUGET_SOURCE_URL: https://nuget.pkg.github.com/tsiswaryalakshmi/index.json
      # PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
     secrets:
       NUGET_USERNAME: ${{ secrets.NUGET_USERNAME }} 
