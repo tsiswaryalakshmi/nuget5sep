@@ -6,8 +6,8 @@ on:
       PATH:
         required: true
         type: string
-      NUGET_SOURCE_URL: 
-        type: string
+      #NUGET_SOURCE_URL: 
+       # type: string
       #PACKAGE_OUTPUT_DIRECTORY:
       #  type: string
     secrets:
@@ -17,11 +17,9 @@ on:
         required: true
 env:
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
-#env:
-#
-#  PROJECT_PATH: ${{ github.workspace }}
-#  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
-#  NUGET_SOURCE_URL: ${{ secrets.NUGET_SOURCE_URL }}
+  PROJECT_PATH: ${{ github.workspace }}
+  #NUGET_SOURCE_URL: ${{ secrets.NUGET_SOURCE_URL }}
+  NUGET_SOURCE_URL: https://nuget.pkg.github.com/tsiswaryalakshmi/index.json
 
 jobs:
   deploy:
@@ -30,8 +28,11 @@ jobs:
     steps:
     - name: 'Checkout'
       uses: actions/checkout@v2
+      
     - name: Print Workspace
       run: echo ${{ github.workspace }}
+     
+
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
     - name: Navigate to Workspace
@@ -41,8 +42,8 @@ jobs:
    # - name: set env variable
     #  echo "      PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output 
     - name: Add Nuget
-      run: nuget.exe sources add -Name "CalcSub" -source ${{ inputs.NUGET_SOURCE_URL }} -Username ${{ secrets.NUGET_USERNAME }} -Password ${{ secrets.NUGET_AUTH_TOKEN }}
+      run: nuget.exe sources add -Name "CalcSub" -source ${{ env.NUGET_SOURCE_URL }} -Username ${{ secrets.NUGET_USERNAME }} -Password ${{ secrets.NUGET_AUTH_TOKEN }}
     - name: Pack Nuget
       run: nuget.exe pack CalcuSub\CalculationRef.nuspec -NoDefaultExcludes -OutputDirectory ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
     - name: Push the Package 
-      run: nuget.exe push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg ${{ secrets.NUGET_AUTH_TOKEN }} -source ${{ inputs.NUGET_SOURCE_URL }}
+      run: nuget.exe push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg ${{ secrets.NUGET_AUTH_TOKEN }} -source ${{ env.NUGET_SOURCE_URL }}
