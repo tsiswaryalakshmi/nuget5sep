@@ -1,0 +1,44 @@
+name: "CalcSub-Nugetautomation" #Template
+
+on:
+  workflow_call:
+    inputs:
+      PATH:
+        required: true
+        type: string
+      NUGET_SOURCE_URL: 
+        type: string
+      PACKAGE_OUTPUT_DIRECTORY:
+        type: string
+    secrets:
+      NUGET_USERNAME:
+        required: true
+      NUGET_AUTH_TOKEN:
+        required: true
+
+#env:
+#
+#  PROJECT_PATH: ${{ github.workspace }}
+#  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
+#  NUGET_SOURCE_URL: ${{ secrets.NUGET_SOURCE_URL }}
+
+jobs:
+  deploy:
+    name: 'Deploy'
+    runs-on: 'windows-latest'
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@v2
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.7
+
+    - name: Add Nuget
+      run: nuget.exe sources add -Name "CalcSub" -source ${{ inputs.NUGET_SOURCE_URL }} -Username ${{ secrets.NUGET_USERNAME }} -Password ${{ secrets.NUGET_AUTH_TOKEN }}
+    - name: Pack Nuget
+      run: nuget.exe pack CalcuSub\${{ inputs.PATH }}.nuspec -NoDefaultExcludes -OutputDirectory ${{ inputs.PACKAGE_OUTPUT_DIRECTORY }}
+    - name: Push the Package 
+      run: nuget.exe push ${{ inputs.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg ${{ secrets.NUGET_AUTH_TOKEN }} -source ${{ inputs.NUGET_SOURCE_URL }}
